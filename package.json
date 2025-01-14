@@ -1,0 +1,19 @@
+{
+	"name": "manage_back",
+	"scripts": {
+		"dev": "bun run --watch src/app.ts",
+		"lint": "bunx biome lint --write ."
+	},
+	"dependencies": {
+		"@hono/zod-validator": "^0.4.2",
+		"drizzle-orm": "^0.38.3",
+		"hono": "^4.6.16",
+		"postgres": "^3.4.5",
+		"zod": "^3.24.1"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "1.9.4",
+		"@types/bun": "latest",
+		"drizzle-kit": "^0.30.1"
+	}
+}

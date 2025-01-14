@@ -1,0 +1,14 @@
+# deps
+node_modules/
+node_modules
+.vscode
+/*.sql
+.rollup.cache
+rollup.config-*.mjs
+*.log
+.DS_Store
+drizzle-seed/src/dev
+node_modules
+package-lock.json
+yarn.lock
+bun.lockb

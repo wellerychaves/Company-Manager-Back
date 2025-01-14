@@ -1,0 +1,15 @@
+services:
+  db:
+    image: postgres:17.2-alpine3.21
+    restart: always
+    environment:
+      POSTGRES_USER: "root"
+      POSTGRES_PASSWORD: "root01"
+      POSTGRES_DB: "manage"
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+    pgdata:
