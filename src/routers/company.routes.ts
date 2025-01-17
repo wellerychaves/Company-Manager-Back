@@ -14,7 +14,3 @@ company.post("/", zValidator("json", createCompanySchema), (c) =>
 	createCompanyController(c),
 );
 company.delete("/:id", (c) => deleteCompanyController(c));
-
-company.notFound((c) => {
-	return c.text("Company doesn't exists", 404);
-});

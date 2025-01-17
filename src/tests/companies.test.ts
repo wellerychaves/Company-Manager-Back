@@ -12,34 +12,44 @@ describe("Company Route Tests", () => {
 	});
 
 	test("POST /companies - Create a company", async () => {
+		const testUser = {
+			firstName: "Test",
+			secondName: "User",
+			email: "testCompany@mail.com",
+			password: "TestPassword123",
+		};
+
 		const res = await app.request("/users", {
 			method: "POST",
-			body: JSON.stringify({
-				firstName: "Test",
-				secondName: "User",
-				email: "testCompany@mail.com",
-				password: "TestPassword123",
-			}),
+			body: JSON.stringify(testUser),
+			headers: { "Content-Type": "application/json" },
 		});
-		const user: IUser = await res.json();
-		userId = user[0].id;
+
+		const users: IUser = await res.json();
+		const user = users[0];
+		userId = user.id;
+
+		const testCompany = {
+			userId: "01942bed-00fb-7000-82d3-7cf41bb14ce9",
+			companyName: "Company Test",
+			companyEmail: "testCompany@mail.com",
+			companyPhone: "(00)91234-5678",
+			address: "Test st.",
+			description: "Test company description",
+		};
 
 		const companyRes = await app.request("companies", {
 			method: "POST",
-			body: JSON.stringify({
-				userId: "01942bed-00fb-7000-82d3-7cf41bb14ce9",
-				companyName: "Company Test",
-				companyEmail: "testCompany@mail.com",
-				companyPhone: "(00)91234-5678",
-				address: "Test st.",
-				description: "Test company description",
-			}),
+			body: JSON.stringify(testCompany),
+			headers: { "Content-Type": "application/json" },
 		});
-		const company: ICompany = await companyRes.json();
-		companyId = company[0].id;
+
+		const companies: ICompany = await companyRes.json();
+		const company = companies[0];
+		companyId = company.id;
 
 		expect(companyRes.status).toBe(201);
-		expect(company[0].companyEmail).toBe("testCompany@mail.com");
+		expect(company.companyEmail).toBe("testCompany@mail.com");
 	});
 
 	test("DELETE /companies/:id - Delete a company", async () => {
