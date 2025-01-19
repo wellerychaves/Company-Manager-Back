@@ -30,10 +30,10 @@ describe("Company Route Tests", () => {
 		userId = user.id;
 
 		const testCompany = {
-			userId: "01942bed-00fb-7000-82d3-7cf41bb14ce9",
+			userId: `${userId}`,
 			companyName: "Company Test",
 			companyEmail: "testCompany@mail.com",
-			companyPhone: "(00)91234-5678",
+			contactPhone: "(00)91234-5678",
 			address: "Test st.",
 			description: "Test company description",
 		};
