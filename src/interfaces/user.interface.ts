@@ -8,7 +8,6 @@ export const userSchema = z.object({
 	email: z.string().email("Invalid E-mail"),
 	password: z.string(),
 	isAdmin: z.boolean().default(false),
-	companies: z.array(z.string()),
 	...timestampsZod,
 });
 
