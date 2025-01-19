@@ -22,7 +22,6 @@ describe("User Route Tests", () => {
 			body: JSON.stringify(testUser),
 			headers: { "Content-Type": "application/json" },
 		});
-
 		const users: IUser = await res.json();
 		const user = users[0];
 		userId = user.id;
