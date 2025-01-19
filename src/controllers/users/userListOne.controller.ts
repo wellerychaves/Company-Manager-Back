@@ -2,7 +2,7 @@ import type { Context } from "hono";
 import { listOneUserService } from "../../services/users/userListOne.service";
 
 export const listOneUserController = async (c: Context) => {
-	const userId = c.req.param("id");
+	const userId: string = c.req.param("id");
 
 	try {
 		const user = await listOneUserService(userId);
