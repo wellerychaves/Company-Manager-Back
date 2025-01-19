@@ -1,39 +1,32 @@
 import { eq } from "drizzle-orm";
 import { db } from "../../database";
 import { companiesTable } from "../../database/schemas/companies.schema";
-import {
-	type ICreateCompanySchema,
-	createCompanySchema,
-} from "../../interfaces/company.interface";
+import { usersTable } from "../../database/schemas/users.schema";
+import { type ICreateCompanySchema, createCompanySchema } from "../../interfaces/company.interface";
 
-export const createCompanyService = async (input: ICreateCompanySchema) => {
-	const validation = createCompanySchema.safeParse(input);
+export const createCompanyService = async (data: ICreateCompanySchema) => {
+	const validation = createCompanySchema.safeParse(data);
 
 	if (!validation.success) {
 		throw new Error(`Validation error: ${validation.error.message}`);
 	}
-	const emailAlreadyExists = await db
-		.select()
-		.from(companiesTable)
-		.where(eq(companiesTable.companyEmail, input.companyName));
 
-	if (emailAlreadyExists.length >= 1) {
-		throw new Error("This email is already being used");
+	const validateUserId = await db.select().from(usersTable).where(eq(usersTable.id, data.userId));
+
+	if (validateUserId.length === 0) {
+		throw new Error("This user does not exist in the database");
 	}
 	const newCompanyData = {
 		id: Bun.randomUUIDv7(),
-		userId: input.userId,
-		companyName: input.companyName,
-		companyEmail: input.companyEmail,
-		contactPhone: input.companyPhone,
-		description: input.description ?? null,
-		address: input.address,
+		userId: data.userId,
+		companyName: data.companyName,
+		companyEmail: data.companyEmail,
+		contactPhone: data.contactPhone,
+		description: data.description ?? null,
+		address: data.address,
 	};
 
-	const query = await db
-		.insert(companiesTable)
-		.values(newCompanyData)
-		.returning();
+	const query = await db.insert(companiesTable).values(newCompanyData).returning();
 
 	return query;
 };
