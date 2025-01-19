@@ -6,9 +6,10 @@ export const companySchema = z.object({
 	userId: z.string(),
 	companyName: z.string(),
 	companyEmail: z.string().email("Invalid E-mail"),
-	companyPhone: z.string(),
+	contactPhone: z.string(),
 	address: z.string(),
 	description: z.string(),
+	location: z.string().optional(),
 	status: z.boolean().default(false),
 	...timestampsZod,
 });
@@ -17,9 +18,10 @@ export const createCompanySchema = companySchema.pick({
 	userId: true,
 	companyName: true,
 	companyEmail: true,
-	companyPhone: true,
+	contactPhone: true,
 	address: true,
 	description: true,
+	location: true,
 });
 
 export type ICompany = z.infer<typeof companySchema>;
