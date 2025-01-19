@@ -2,7 +2,11 @@ import { db } from "../../database";
 import { companiesTable } from "../../database/schemas/companies.schema";
 
 export const listCompaniesService = async () => {
-	const companies = db.select().from(companiesTable);
+	try {
+		const companies = db.select().from(companiesTable);
 
-	return companies;
+		return companies;
+	} catch (err) {
+		throw new Error(`${err.message}`);
+	}
 };
