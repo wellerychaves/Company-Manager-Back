@@ -10,5 +10,4 @@ export const salesSchema = z.object({
 	updatedAt: z.date().default(new Date()),
 });
 
-
 export type ISales = z.infer<typeof salesSchema>;
