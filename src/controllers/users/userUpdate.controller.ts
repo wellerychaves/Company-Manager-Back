@@ -2,7 +2,7 @@ import type { Context } from "hono";
 import { updateUserService } from "../../services/users/userUpdate.service";
 
 export const updateUserController = async (c: Context) => {
-	const userId = c.req.param("id");
+	const userId: string = c.req.param("id");
 	const body = await c.req.json();
 
 	try {
@@ -10,6 +10,6 @@ export const updateUserController = async (c: Context) => {
 
 		return c.json(updatedUser, 200);
 	} catch (err) {
-		return c.json({ message: err }, 400);
+		return c.json({ message: err.message }, 400);
 	}
 };
