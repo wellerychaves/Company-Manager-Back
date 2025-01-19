@@ -2,7 +2,7 @@ import type { Context } from "hono";
 import { deleteUserService } from "../../services/users/userDelete.service";
 
 export const deleteUserController = async (c: Context) => {
-	const userId = c.req.param("id");
+	const userId: string = c.req.param("id");
 
 	try {
 		await deleteUserService(userId);
