@@ -2,7 +2,7 @@ import type { Context } from "hono";
 import { deleteCompanyService } from "../../services/companies/companyDelete.service";
 
 export const deleteCompanyController = async (c: Context) => {
-	const companyId = c.req.param("id");
+	const companyId: string = c.req.param("id");
 
 	try {
 		await deleteCompanyService(companyId);
