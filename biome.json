@@ -13,7 +13,8 @@
 		"enabled": true,
 		"indentStyle": "tab",
 		"lineEnding": "crlf",
-		"indentWidth": 4
+		"indentWidth": 4,
+		"lineWidth": 120
 	},
 	"organizeImports": {
 		"enabled": true
