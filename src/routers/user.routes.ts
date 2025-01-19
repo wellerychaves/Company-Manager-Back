@@ -15,9 +15,9 @@ export const user = new Hono();
 user.get("/", (c) => listUserController(c));
 user.get("/:id", (c) => listOneUserController(c));
 user.post("/", zValidator("json", createUserSchema), (c) => createUserController(c));
-user.delete("/:id", (c) => deleteUserController(c));
 user.post("/login", zValidator("json", userLoginSchema), (c) => userLoginController(c));
 user.patch("/:id", (c) => updateUserController(c));
+user.delete("/:id", (c) => deleteUserController(c));
 
 user.notFound((c) => {
 	return c.text("Not Found", 404);
