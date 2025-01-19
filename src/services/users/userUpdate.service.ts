@@ -3,7 +3,7 @@ import { db } from "../../database";
 import { usersTable } from "../../database/schemas/users.schema";
 import type { IUser } from "../../interfaces/user.interface";
 
-export const updateUserService = async (userId: string, body) => {
+export const updateUserService = async (userId: string, body: Partial<IUser>) => {
 	const updates: Partial<IUser> = {};
 
 	if (body.firstName) updates.firstName = body.firstName;
