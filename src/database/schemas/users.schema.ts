@@ -1,5 +1,5 @@
-import { relations, sql } from "drizzle-orm";
-import { boolean, pgTable, text, varchar } from "drizzle-orm/pg-core";
+import { relations } from "drizzle-orm";
+import { boolean, pgTable, varchar } from "drizzle-orm/pg-core";
 import { timestampsDrizzle } from "../helpers/timestamps.helpers";
 import { companiesTable } from "./companies.schema";
 
@@ -10,7 +10,6 @@ export const usersTable = pgTable("users", {
 	email: varchar().notNull().unique(),
 	password: varchar().notNull(),
 	isAdmin: boolean().default(false),
-	companies: text().array().default(sql`ARRAY[]::text[]`),
 	...timestampsDrizzle,
 });
 
