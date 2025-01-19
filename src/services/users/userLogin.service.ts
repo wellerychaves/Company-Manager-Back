@@ -6,10 +6,7 @@ import { verifyPassword } from "../../utils/passwordUtils";
 
 export const userLoginService = async (email: string, password: string) => {
 	const secretPhrase: string = process.env.SECRET_PHRASE;
-	const [user] = await db
-		.select()
-		.from(usersTable)
-		.where(eq(usersTable.email, email));
+	const [user] = await db.select().from(usersTable).where(eq(usersTable.email, email));
 
 	const storedUserPassword = user.password;
 

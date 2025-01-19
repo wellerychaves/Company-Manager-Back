@@ -8,10 +8,7 @@ export async function hashPassword(password: string) {
 }
 
 export async function verifyPassword(password: string, storedPassword: string) {
-	const isMatch: boolean = await Bun.password.verify(
-		password,
-		storedPassword,
-	);
+	const isMatch: boolean = await Bun.password.verify(password, storedPassword);
 
 	return isMatch;
 }

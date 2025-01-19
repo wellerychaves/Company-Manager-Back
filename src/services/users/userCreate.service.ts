@@ -1,10 +1,7 @@
 import { eq } from "drizzle-orm";
 import { db } from "../../database";
 import { usersTable } from "../../database/schemas/users.schema";
-import {
-	type ICreateUserSchema,
-	createUserSchema,
-} from "../../interfaces/user.interface";
+import { type ICreateUserSchema, createUserSchema } from "../../interfaces/user.interface";
 import { hashPassword } from "../../utils/passwordUtils";
 
 export const createUserService = async (input: ICreateUserSchema) => {
@@ -14,10 +11,7 @@ export const createUserService = async (input: ICreateUserSchema) => {
 		throw new Error(`Validation error: ${validation.error.message}`);
 	}
 
-	const emailAlreadyExists = await db
-		.select()
-		.from(usersTable)
-		.where(eq(usersTable.email, input.email));
+	const emailAlreadyExists = await db.select().from(usersTable).where(eq(usersTable.email, input.email));
 
 	if (emailAlreadyExists.length >= 1) {
 		throw new Error("This email is already being used");

@@ -13,11 +13,7 @@ export const updateUserService = async (userId: string, body) => {
 		throw new Error("No valid property provided for update");
 	}
 
-	const user = await db
-		.update(usersTable)
-		.set(updates)
-		.where(eq(usersTable.id, userId))
-		.returning();
+	const user = await db.update(usersTable).set(updates).where(eq(usersTable.id, userId)).returning();
 	// fazer tratativa caso user retorne um erro
 
 	return user;

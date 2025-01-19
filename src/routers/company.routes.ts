@@ -10,7 +10,5 @@ export const company = new Hono();
 
 company.get("/", (c) => listCompaniesController(c));
 company.get("/:id", (c) => listOneCompanyController(c));
-company.post("/", zValidator("json", createCompanySchema), (c) =>
-	createCompanyController(c),
-);
+company.post("/", zValidator("json", createCompanySchema), (c) => createCompanyController(c));
 company.delete("/:id", (c) => deleteCompanyController(c));
