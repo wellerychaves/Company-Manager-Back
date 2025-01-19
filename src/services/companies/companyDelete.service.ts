@@ -6,7 +6,7 @@ export const deleteCompanyService = async (companyId: string) => {
 	const company = await db.delete(companiesTable).where(eq(companiesTable.id, companyId)).returning();
 
 	if (company.length === 0) {
-		throw new Error("Company does not exist in database");
+		throw new Error("This company does not exist in database");
 	}
 
 	return company;
