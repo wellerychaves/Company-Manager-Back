@@ -2,6 +2,7 @@ import { relations } from "drizzle-orm";
 import { boolean, pgTable, text, varchar } from "drizzle-orm/pg-core";
 import { timestampsDrizzle } from "../helpers/timestamps.helpers";
 import { productsTable } from "./products.schema";
+import { salesTable } from "./sales.schema";
 import { usersTable } from "./users.schema";
 
 export const companiesTable = pgTable("companies", {
@@ -22,4 +23,5 @@ export const companiesRelations = relations(companiesTable, ({ one, many }) => (
 		references: [usersTable.id],
 	}),
 	products: many(productsTable),
+	sales: many(salesTable),
 }));
