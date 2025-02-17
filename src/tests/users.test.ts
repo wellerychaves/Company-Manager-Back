@@ -4,10 +4,6 @@ import type { IUser } from "../interfaces/user.interface";
 
 describe("User Route Tests", () => {
 	let userId: string;
-	test("GET /users - List all users", async () => {
-		const res = await app.request("/users");
-		expect(res.status).toBe(200);
-	});
 
 	test("POST /users - Create a user", async () => {
 		const testUser = {
@@ -28,6 +24,11 @@ describe("User Route Tests", () => {
 
 		expect(res.status).toBe(201);
 		expect(user.email).toBe("test@mail.com");
+	});
+
+	test("GET /users - List all users", async () => {
+		const res = await app.request("/users");
+		expect(res.status).toBe(200);
 	});
 
 	test("DELETE /users/:id - Delete a user", async () => {
