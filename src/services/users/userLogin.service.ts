@@ -8,6 +8,10 @@ export const userLoginService = async (email: string, password: string) => {
 	const secretPhrase: string = process.env.SECRET_PHRASE;
 	const [user] = await db.select().from(usersTable).where(eq(usersTable.email, email));
 
+	if (!user) {
+		throw new Error("Incorrect E-mail or password");
+	}
+
 	const storedUserPassword = user.password;
 
 	const validatePassword = await verifyPassword(password, storedUserPassword);
