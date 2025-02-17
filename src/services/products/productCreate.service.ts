@@ -2,7 +2,11 @@ import { eq } from "drizzle-orm";
 import { db } from "../../database";
 import { companiesTable } from "../../database/schemas/companies.schema";
 import { productsTable } from "../../database/schemas/products.schema";
-import { type ICreateProductSchema, createProductSchema } from "../../interfaces/produtct.interface";
+import {
+	type ICreateProductSchema,
+	type ICreateProductSchemaReturn,
+	createProductSchema,
+} from "../../interfaces/produtct.interface";
 
 export const createProductService = async (data: ICreateProductSchema) => {
 	const validation = createProductSchema.safeParse(data);
@@ -27,6 +31,10 @@ export const createProductService = async (data: ICreateProductSchema) => {
 	};
 
 	const query = await db.insert(productsTable).values(newProductData).returning();
+	const objeto: ICreateProductSchemaReturn = {
+		...query[0],
+		price: query[0].price.toString(),
+	};
 
-	return query;
+	return objeto;
 };
