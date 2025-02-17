@@ -8,7 +8,11 @@ export const createProductController = async (c: Context) => {
 	try {
 		const product = await createProductService(data);
 
-		return c.json(product, 201);
+		try {
+			return c.json(product, 201);
+		} catch (err) {
+			console.error(err.message);
+		}
 	} catch (err) {
 		return c.json({ error: err.message }, 400);
 	}
