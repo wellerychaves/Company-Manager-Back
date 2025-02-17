@@ -6,7 +6,17 @@ export const productSchema = z.object({
 	companyId: z.string(),
 	productName: z.string(),
 	quantity: z.number().int().positive(),
-	price: z.bigint().positive(),
+	price: z.number().int().positive(),
+	description: z.string(),
+	...timestampsZod,
+});
+
+export const productSchemaReturn = z.object({
+	id: z.string().uuid(),
+	companyId: z.string(),
+	productName: z.string(),
+	quantity: z.number().int().positive(),
+	price: z.string(),
 	description: z.string(),
 	...timestampsZod,
 });
@@ -19,5 +29,14 @@ export const createProductSchema = productSchema.pick({
 	description: true,
 });
 
+export const createProductSchemaReturn = productSchemaReturn.pick({
+	companyId: true,
+	productName: true,
+	quantity: true,
+	price: true,
+	description: true,
+});
+
 export type IProduct = z.infer<typeof productSchema>;
 export type ICreateProductSchema = z.infer<typeof createProductSchema>;
+export type ICreateProductSchemaReturn = z.infer<typeof createProductSchemaReturn>;
